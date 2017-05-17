@@ -1,4 +1,4 @@
-var request = require('request-promise');
+var request = require('request-promise-native');
 
 var API_ROOT = 'https://api.greenhouse.io/v1/boards/';
 
@@ -82,7 +82,7 @@ function GreenhouseRequest(company_name, api_key) {
             // if we get HTML back from API, it's a bad response - pk
             throw new Error("Bad Response From Server");
           }
-          fulfill(response);
+          fulfill(JSON.parse(response));
         }).catch(function(err) {
           reject(err);
         });
@@ -97,7 +97,5 @@ function GreenhouseRequest(company_name, api_key) {
 
   return module;
 }
-
-var gh = require('greenhouseio');
 
 module.exports = exports = GreenhouseRequest;
